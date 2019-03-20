@@ -1,0 +1,10 @@
+archivo=open("ejemplo_archivos.txt","w")
+print("hola",file=archivo)
+archivo.close()
+archivonuevo=open("ejemplo_archivos.txt")
+frase=archivonuevo.readlines()
+archivonuevo.close()
+print(frase)
+for i in frase:
+	limpio=i.strip()
+	print(limpio)
