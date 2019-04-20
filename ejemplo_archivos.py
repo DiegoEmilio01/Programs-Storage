@@ -1,11 +1,10 @@
-archivo=open("ejemplo_archivos.txt","w")
-print('archivo=open("ejemplo_archivos.txt","w")\nprint("hola",file=archivo)\narchivo.close()\narchivonuevo=open("ejemplo_archivos.txt")\nfrase=archivonuevo.readlines()\narchivonuevo.close()\nprint(frase)\nfor i in frase:\n\tlimpio=i.strip()\n\tprint(limpio)',file=archivo)
-archivo.close()
-archivonuevo=open("ejemplo_archivos.txt")
-frase=archivonuevo.readlines()
+archivo = open("data-cruda.txt","r")
+lineas=archivo.readlines()
+print(lineas)
+archivonuevo=open("data_en_listas.txt","w")
+for i in lineas:
+      elemento=i.strip().split(",")
+      print(elemento,file=archivonuevo)
 archivonuevo.close()
-for i in frase:
-    limpio=i.strip()
-    print(limpio)
-
-## Para .csv usar i.strip().split(",") y se obtiene otra lista.
+archivo.close()
+# Para .csv usar i.strip().split(",") y se obtiene otra lista.
