@@ -1,7 +1,7 @@
-#no se regalan a si mismos y no le regalan al que les toco
+# no se regalan a si mismos y no le regalan al que les toco
 import random
-def amigo_secreto(lista,l,sol,soluciones):
-    if len(sol)==len(lista):
+def amigo_secreto(lista, l, sol, soluciones):
+    if len(sol) == len(lista):
         copia=sol.copy()
         soluciones.append(copia)
         return True
