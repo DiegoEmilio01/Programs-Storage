@@ -1,1 +1,5 @@
-puts "asd".to_i
+name = gets.chomp
+iterator = name.split('')
+iterator.each do |d|
+  puts d
+end
