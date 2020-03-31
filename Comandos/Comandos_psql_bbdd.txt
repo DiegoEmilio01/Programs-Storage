@@ -1,0 +1,14 @@
+- POSTGRESQL
+
+sudo su - postgres  (alias=psql) # Entra al servidor
+psql				 # Entra a psql dentro del server
+ssh grupo99@codd.ing.puc.cl      # Entra al servidor de la U
+createdb nombre_db		 # Crea bbdd
+psql nombre_db			 # Usar esta bbdd
+\l				 # En psql para printear las bbdd
+
+CREATE TABLE nombre (
+    atributo_1 tipo,
+    attributo_N tipo,
+    PRIMARY KEY(atributo_1);
+

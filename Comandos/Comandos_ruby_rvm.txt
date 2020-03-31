@@ -1,0 +1,8 @@
+- RUBY VERSION MANAGER comandos útiles:
+
+• rvm get stable		# Actualiza RVM
+• rvm list			# lista versiones de Ruby instaladas localmente
+• rvm list known		# lista todas las versiones de Ruby disponibles para descargar
+• rvm install [version]		# instala versión especificada de Ruby • e.g: rvm install 2.6.3
+• rvm use [version]		# cambia versión de Ruby usada por el sistema
+• rvm --default use [version]   # cambia la versión default

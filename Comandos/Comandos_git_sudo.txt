@@ -1,0 +1,36 @@
+Subir cambios:
+
+gs: git status               #Verificar el estado.
+ga: git add --all            #Agregar todo lo nuevo a "querer cambiarlo".
+gc: git commit -m "mensaje"  #Generar el commit y confirmar los cambios con su respectivo mensaje.
+gp: git push                 #Enviar los cambios al repositorio en GitHub
+
+-Revertir un commit y que no estι el historial (borrar todo el comtenido de ese comando):
+
+git filter-branch -f
+
+git reset HEAD^ --hard
+
+git push -f
+
+
+-Revertir un commit:
+
+git revert <commit hash>
+
+
+-Actualizar el repo a un estado anterior de un commit pasado:
+
+git checkout <commit hash>
+
+
+-Merge:
+
+git stash
+git pull
+git stash pop
+
+
+- INSTALAR UN .DEB
+
+sudo dpkg -i package_file.deb

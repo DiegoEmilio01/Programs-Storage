@@ -2,22 +2,17 @@ require "csv"
 require_relative "clases.rb"
 
 def escribir_resultados(path, texto)
-    File.open(path, "a") do |file|
-        file.write(texto)
-    end
+    File.open(path, "a") {|file| file.write(texto)}
 end
 
 def crear_reiniciar_output(path)
-    File.open(path, "w") do |file|
-    end
+    File.open(path, "w") {|file|}
 end
 
 def leer_instrucciones(path)
     instrucciones = []
     File.open(path, "r") do |file|
-        file.each_line do |line|
-          instrucciones << line.to_s.chomp
-        end
+        file.each_line {|line| instrucciones << line.to_s.chomp}
     end
     return instrucciones
 end
@@ -71,12 +66,8 @@ def leer_pasajeros(carpeta, dict_vuelos, dict_paises)
         paises = csv[i]["paises"].split(":")
         lista_vuelos = []
         lista_paises = []
-        vuelos.each do |vuelo|
-            lista_vuelos << dict_vuelos[vuelo.to_i]
-        end
-        paises.each do |pais|
-            lista_paises << dict_paises[pais.to_i]
-        end
+        vuelos.each {|vuelo| lista_vuelos << dict_vuelos[vuelo.to_i]}
+        paises.each {|pais| lista_paises << dict_paises[pais.to_i]}
         pasajero = Pasajero.new(csv[i]["id"], csv[i]["nombre"], csv[i]["edad"],
         lista_vuelos, lista_paises)
         dict[csv[i]["id"].to_i] = pasajero
@@ -102,7 +93,7 @@ def pasajeros_en_cuarentena(pasajeros)
             texto += texto_pasajero + ". " + texto_cuarentena + "\n"
         end
     end
-    puts texto + "\n*** FIN PASAJEROS EN CUARENTENA ***\n\n"
+    #puts texto + "\n*** FIN PASAJEROS EN CUARENTENA ***\n\n"
     return texto + "*** FIN PASAJEROS EN CUARENTENA ***\n"
 end
 
@@ -116,7 +107,7 @@ def habitantes_en_cuarentena(habitantes)
             texto += texto_habitante
         end
     end
-    puts texto + "\n*** FIN HABITANTES EN CUARENTENA ***\n\n"
+    #puts texto + "\n*** FIN HABITANTES EN CUARENTENA ***\n\n"
     return texto + "*** FIN HABITANTES EN CUARENTENA ***\n"
 end
 
@@ -136,7 +127,7 @@ def personas_en_cuarentena(habitantes, pasajeros)
             texto += texto_pasajero
         end
     end
-    puts texto + "\n*** FIN PERSONAS EN CUARENTENA ***\n\n"
+    #puts texto + "\n*** FIN PERSONAS EN CUARENTENA ***\n\n"
     return texto + "*** FIN PERSONAS EN CUARENTENA ***\n"
 end
 
@@ -154,7 +145,7 @@ def personas_en_edad_de_riesgo(habitantes, pasajeros)
             texto += texto_pasajero
         end
     end
-    puts texto + "\n*** FIN PERSONAS EN EDAD DE RIESGO ***\n\n"
+    #puts texto + "\n*** FIN PERSONAS EN EDAD DE RIESGO ***\n\n"
     return texto + "*** FIN PERSONAS EN EDAD DE RIESGO ***\n"
 end
 
@@ -167,7 +158,7 @@ def pasajeros_de_paises_infectados(pasajeros)
             texto += texto_pasajero + ". " + texto_cuarentena + "\n"
         end
     end
-    puts texto + "\n*** FIN PASAJEROS DE PAISES INFECTADOS ***\n\n"
+    #puts texto + "\n*** FIN PASAJEROS DE PAISES INFECTADOS ***\n\n"
     return texto + "*** FIN PASAJEROS DE PAISES INFECTADOS ***\n"
 end
 
@@ -180,6 +171,6 @@ def pasajeros_de_vuelos_infectados(pasajeros)
             texto += texto_pasajero + ". " + texto_cuarentena + "\n"
         end
     end
-    puts texto + "\n*** FIN PASAJEROS DE VUELOS INFECTADOS ***\n\n"
+    #puts texto + "\n*** FIN PASAJEROS DE VUELOS INFECTADOS ***\n\n"
     return texto + "*** FIN PASAJEROS DE VUELOS INFECTADOS ***\n"
 end
