@@ -7,8 +7,38 @@ createdb nombre_db		 # Crea bbdd
 psql nombre_db			 # Usar esta bbdd
 \l				 # En psql para printear las bbdd
 
-CREATE TABLE nombre (
-    atributo_1 tipo,
-    attributo_N tipo,
-    PRIMARY KEY(atributo_1);
+
+MODIFICAR TABLAS:
+
+CREATE TABLE nombre (atributo_1 tipo, ..., attributo_n tipo, PRIMARY KEY(atributo_1);
+INSERT INTO nombre VALUES(atributo1, ..., atributo_n);	Strings entre comillas simples.
+ALTER TABLE nombre DROP COLUMN atributo;
+ALTER TABLE nombre ADD COLUMN atributo tipo;
+DELETE FROM nombre WHERE condicion;
+
+
+SQL RELACIONAL
+
+PROYECCION = SELECT DISTINCT atributo_1, ..., atributo_n	# El distinct para que sean conjuntos.
+SELECCION = WHERE condicion_1 AND cond_2 OR cond_3
+	LIKE = % carios carácteres, _ uno sólo.			# Ej: 'Arturo%'.)
+	IN = atributo (NOT) IN consulta				# Ve que esté dentro del conjunto.
+	ANY o ALL
+PRODUCTO CRUZ = FROM tabla_1, tabla_2
+JOIN = SELECT atributos FROM tabla_1, tabla_2 WHERE condicion;
+UNION = consulta_1 UNION consulta_2;				# Elimina duplicados porque trabaja con conjuntos.
+INTERSECCION = consulta_1 INTERSECT consulta_2
+RENAME = consulta AS nuevo_nombre				# También se puede renombrar una agregación. Renombrar subconsultas.
+DIFERENCIA = consulta_1 EXCEPT consulta_2
+
+
+AGREGACION
+
+COUNT(DISTINT atributo)	# Cuenta el número de elementos diferentes.
+MAX(atributo)		# Arroja el valor máximo de dicha columna.
+MIN(atributo)		# Arroja el valor mínimo de dicha columna.
+ORDER BY atributo	# Ordena por atributo. ASC o DESC.
+GROUP BY atributo	# Agrupa por atributo, incluir todos los que se proyecten. Se una con el COUNT.
+HAVING condicion	# Antes del ORDER BY y después del GROUP BY. Es para condicionar agregaciones. El COUNT se ejecuta después del WHERE.
+
 
