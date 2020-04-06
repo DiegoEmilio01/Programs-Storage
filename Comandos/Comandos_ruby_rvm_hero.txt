@@ -32,3 +32,7 @@ heroku buildpacks:set heroku/ruby	# Set el lenguaje de la app.
 git push heroku master			# Pushear a heroku.
 heroku local web			# Corre la app localmente (tambien se puede con el server de rails).
 
+
+RUBOCOP
+
+https://github.com/rubocop-hq/rubocop
