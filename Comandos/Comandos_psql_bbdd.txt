@@ -1,11 +1,16 @@
 - POSTGRESQL
 
-sudo su - postgres  (alias=psql) # Entra al servidor
-psql				 # Entra a psql dentro del server
-ssh grupo99@codd.ing.puc.cl      # Entra al servidor de la U
-createdb nombre_db		 # Crea bbdd
-psql nombre_db			 # Usar esta bbdd
-\l				 # En psql para printear las bbdd
+sudo su - postgres  (alias=psql)		# Entra al servidor.
+sudo -u usuario psql bbdd			# Entra al servidor y bbdd como usuario.
+psql						# Entra a psql dentro del server.
+create user nombre with password 'contraseña';	# Ejecutar en psql. Crea usuario.
+alter user nombre with superuser;		# Le da al usuario permisos de super user.
+ssh grupo99@codd.ing.puc.cl			# Entra al servidor de la U.
+createdb nombre_db				# Crea bbdd.
+psql nombre_db					# Usar esta bbdd.
+\l						# En psql para printear las bbdd.
+\d						# En psql para printear las tablas.
+\du						# En psql para printear los usuarios.
 
 
 MODIFICAR TABLAS:
@@ -37,8 +42,9 @@ AGREGACION
 COUNT(DISTINT atributo)	# Cuenta el número de elementos diferentes.
 MAX(atributo)		# Arroja el valor máximo de dicha columna.
 MIN(atributo)		# Arroja el valor mínimo de dicha columna.
+SUM(atributo)		# Suma cierto atributo numérico al agrupar por otro atributo. Ej: SUM(precio*cantidad) AS total_gastado.
 ORDER BY atributo	# Ordena por atributo. ASC o DESC.
 GROUP BY atributo	# Agrupa por atributo, incluir todos los que se proyecten. Se una con el COUNT.
-HAVING condicion	# Antes del ORDER BY y después del GROUP BY. Es para condicionar agregaciones. El COUNT se ejecuta después del WHERE.
+HAVING condicion	# Después del GROUP BY y antes del ORDER BY. Es para condicionar agregaciones (no los alias). El COUNT se ejecuta después del WHERE.
 
 
