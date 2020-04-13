@@ -22,15 +22,18 @@ rails server					# Levanta el server para correr la app (ejecutar dentro de la c
 
 HEROKU (ejecutar dentro del repositorio de github)
 
-LLamar al repo como la app, copiar carpetas dentro, crear el procfile, crear heroku, setear lenguaje, pushear a heroku.
+Crear el Procfile (web:bundle exec puma -C config/puma.rb), loguearse a heroku, crear app heroku, setear lenguaje, pushear a heroku, migrar la base de datos, abrir la app.
 
-heroku login				# Chequear instalación e iniciar sesión desde el browser.
-heroku create				# Crear app en heroku.
-heroku open				# Abre el link de la app en heroku.
-heroku logs --tail			# Ve los logs recibidos por la app.
-heroku buildpacks:set heroku/ruby	# Set el lenguaje de la app.
-git push heroku master			# Pushear a heroku.
-heroku local web			# Corre la app localmente (tambien se puede con el server de rails).
+heroku login					# Chequear instalación e iniciar sesión desde el browser.
+heroku create					# Crear app en heroku.
+heroku open					# Abre el link de la app en heroku.
+heroku logs --tail				# Ve los logs recibidos por la app.
+heroku buildpacks:set -a app_name heroku/ruby	# Set el lenguaje de la app.
+heroku git:remote -a app_name			# Setear que la app no es un repo entero sino que esta dentro de otro repo.
+git push heroku master				# Pushear a heroku.
+heroku run rake db:migrate			# Migra la base de datos a heroku.
+heroku local web				# Corre la app localmente (tambien se puede con el server de rails).
+
 
 
 RUBOCOP

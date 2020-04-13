@@ -13,7 +13,7 @@ psql nombre_db					# Usar esta bbdd.
 \du						# En psql para printear los usuarios.
 
 
-MODIFICAR TABLAS:
+- MODIFICAR TABLAS:
 
 CREATE TABLE nombre (atributo_1 tipo, ..., attributo_n tipo, PRIMARY KEY(atributo_1);
 INSERT INTO nombre VALUES(atributo1, ..., atributo_n);	Strings entre comillas simples.
@@ -22,11 +22,11 @@ ALTER TABLE nombre ADD COLUMN atributo tipo;
 DELETE FROM nombre WHERE condicion;
 
 
-SQL RELACIONAL
+- SQL RELACIONAL
 
 PROYECCION = SELECT DISTINCT atributo_1, ..., atributo_n	# El distinct para que sean conjuntos.
 SELECCION = WHERE condicion_1 AND cond_2 OR cond_3
-	LIKE = % carios carácteres, _ uno sólo.			# Ej: 'Arturo%'.)
+	LIKE = % carios carácteres, _ uno sólo.			# Ej: 'Arturo%'.
 	IN = atributo (NOT) IN consulta				# Ve que esté dentro del conjunto.
 	ANY o ALL
 PRODUCTO CRUZ = FROM tabla_1, tabla_2
@@ -37,7 +37,7 @@ RENAME = consulta AS nuevo_nombre				# También se puede renombrar una agregaci�
 DIFERENCIA = consulta_1 EXCEPT consulta_2
 
 
-AGREGACION
+- AGREGACION
 
 COUNT(DISTINT atributo)	# Cuenta el número de elementos diferentes.
 MAX(atributo)		# Arroja el valor máximo de dicha columna.
