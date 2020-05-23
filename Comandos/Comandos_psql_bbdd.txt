@@ -19,11 +19,12 @@ psql nombre_db										# Usar esta bbdd.
 CREATE TABLE tabla (atr_1 tipo PRIMARY KEY, ..., atr_n tipo, FOREIGN KEY (atr_i) REFERENCES tabla_2(atr));	# El orden de los atributos es este para siempre.
 INSERT INTO tabla VALUES(0, 'string', 'YYYY-MM-DD', ..., atr_n);						# Insertar una tupla en la tabla. Tanto con INSERT como DELETE se pueden hacer consultas anidadas.
 ALTER TABLE tabla DROP COLUMN atributo;										# Borra una columna.
-ALTER TABLE tabla ADD COLUMN atributo tipo;									# Agrega una columna.
+ALTER TABLE tabla ADD COLUMN atributo tipo NOT NULL DEFAULT '';							# Agrega una columna.
 ALTER TABLE tabla ALTER COLUMN col SET NOT NULL;								# Establece una columna como no nula.
 DELETE FROM tabla WHERE condicion;										# Borrar todas las tuplas que cumplan la condición.
 DROP TABLE IF EXISTS tabla;											# Borra la tabla.
 UPDATE tabla SET atributo=input WHERE condición;								# Actualiza todas las tuplas que cumplan la condición.
+ALTER TABLE hec DROP CONSTRAINT hec_cidd_fkey;									# Borra una referencia.
 
 
 - SQL RELACIONAL
@@ -66,7 +67,7 @@ WITH RECURSIVE tabla_recursiva(atr_1, atr_2) AS
 SELECT * FROM tabla_recursiva;
 
 
-- FUNCIONES BASICAS
+- FUNCIONES BASICAS - PROCEDIMIENTOS ALMACENADOS
 
 CREATE OR REPLACE FUNCTION nombre_fn (atr_1 tipo_1, ..., atr_n tipo_n)	# Se puede guardar este código en nombre_fn.sql (en cualquier carpeta sin ; al final y la consola se debe correr ahí) y luego para importarla en psql: \i nombre_fn.sql
 RETURNS tipo_retorno AS							# Usar void cuando no se retorna nada. Puede ser INTEGER, TABLE(atr_1 tipo_1,...) , etc.

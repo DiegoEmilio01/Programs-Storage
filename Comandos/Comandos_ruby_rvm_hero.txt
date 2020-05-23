@@ -1,11 +1,12 @@
 - RUBY VERSION MANAGER comandos útiles:
 
-• rvm get stable		# Actualiza RVM
-• rvm list			# lista versiones de Ruby instaladas localmente
-• rvm list known		# lista todas las versiones de Ruby disponibles para descargar
-• rvm install [version]		# instala versión especificada de Ruby • e.g: rvm install 2.6.3
-• rvm use [version]		# cambia versión de Ruby usada por el sistema
-• rvm --default use [version]   # cambia la versión default
+• rvm get stable		# Actualiza RVM.
+• rvm list			# Lista versiones de Ruby instaladas localmente.
+• rvm list known		# Lista todas las versiones de Ruby disponibles para descargar.
+• rvm install [version]		# Instala versión especificada de Ruby • e.g: rvm install 2.6.3
+• rvm use [version]		# Cambia versión de Ruby usada por el sistema.
+• rvm --default use [version]   # Cambia la versión default.
+• rvm remove [version]		# Desinstala una versión de Ruby.
 
 
 - RAILS
@@ -32,6 +33,7 @@ heroku logs --tail				# Ve los logs recibidos por la app.
 heroku buildpacks:set -a app-name heroku/ruby	# Set el lenguaje de la app.
 git push heroku master				# Pushear a heroku.
 heroku run rake db:migrate			# Migra la base de datos a heroku.
+heroku run rake db:seed 			# Migra la seed a heroku.
 heroku open					# Abre el link de la app en heroku.
 heroku local web				# Corre la app localmente (tambien se puede con el server de rails).
 heroku git:remote -a app-name			# Setear que la app no es un repo entero sino que esta dentro de otro repo.
