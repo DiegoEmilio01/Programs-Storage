@@ -21,10 +21,14 @@ INSERT INTO tabla VALUES(0, 'string', 'YYYY-MM-DD', ..., atr_n);						# Insertar
 ALTER TABLE tabla DROP COLUMN atributo;										# Borra una columna.
 ALTER TABLE tabla ADD COLUMN atributo tipo NOT NULL DEFAULT '';							# Agrega una columna.
 ALTER TABLE tabla ALTER COLUMN col SET NOT NULL;								# Establece una columna como no nula.
+ALTER TABLE tabla ADD CONSTRAINT constraint_name FOREIGN KEY (atr1) REFERENCES tabla (atr2);			# Agrega foreign key.
 DELETE FROM tabla WHERE condicion;										# Borrar todas las tuplas que cumplan la condición.
 DROP TABLE IF EXISTS tabla;											# Borra la tabla.
 UPDATE tabla SET atributo=input WHERE condición;								# Actualiza todas las tuplas que cumplan la condición.
-ALTER TABLE hec DROP CONSTRAINT hec_cidd_fkey;									# Borra una referencia.
+ALTER TABLE tabla DROP CONSTRAINT tabla_atr_fkey;								# Borra una referencia.
+CREATE SEQUENCE tabla_atr_seq START WITH maximo_atr + 1;							# Crea una secuencia para simular el datatype SERIAL.
+ALTER SEQUENCE tabla_atr_seq OWNED BY tabla.atr;								# Asignarle una tabla a la secuencia.
+ALTER TABLE tabla ALTER COLUMN atr SET DEFAULT nextval('tabla_atr_seq');					# Setear que el atr de la tabla de rige por la seq. Setear a not null si no lo es.
 
 
 - SQL RELACIONAL
