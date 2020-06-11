@@ -11,7 +11,9 @@ psql nombre_db										# Usar esta bbdd.
 \l											# En psql para printear las bbdd.
 \d											# En psql para printear las tablas.
 \du											# En psql para printear los usuarios.
+\df											# En psql para printear los procedimientos almacenados.
 \COPY paises(pais, telefono) from 'Entrega2/csv/Paises.csv' DELIMITER ',' CSV HEADER    # Con la tabla creada, la pobla de datos desde un csv. Poner los atributos en el orden del csv (se conserva el de creación).
+\c db user										# Cambiar a la otra base de datos utilizando otro usuario.
 
 
 - MODIFICAR TABLAS:
@@ -21,7 +23,7 @@ INSERT INTO tabla VALUES(0, 'string', 'YYYY-MM-DD', ..., atr_n);						# Insertar
 ALTER TABLE tabla DROP COLUMN atributo;										# Borra una columna.
 ALTER TABLE tabla ADD COLUMN atributo tipo NOT NULL DEFAULT '';							# Agrega una columna.
 ALTER TABLE tabla ALTER COLUMN col SET NOT NULL;								# Establece una columna como no nula.
-ALTER TABLE tabla ADD CONSTRAINT constraint_name FOREIGN KEY (atr1) REFERENCES tabla (atr2);			# Agrega foreign key.
+ALTER TABLE tabla ADD CONSTRAINT constraint_name FOREIGN KEY (atr1) REFERENCES tabla(atr2);			# Agrega foreign key.
 DELETE FROM tabla WHERE condicion;										# Borrar todas las tuplas que cumplan la condición.
 DROP TABLE IF EXISTS tabla;											# Borra la tabla.
 UPDATE tabla SET atributo=input WHERE condición;								# Actualiza todas las tuplas que cumplan la condición.
@@ -29,6 +31,7 @@ ALTER TABLE tabla DROP CONSTRAINT tabla_atr_fkey;								# Borra una referencia.
 CREATE SEQUENCE tabla_atr_seq START WITH maximo_atr + 1;							# Crea una secuencia para simular el datatype SERIAL.
 ALTER SEQUENCE tabla_atr_seq OWNED BY tabla.atr;								# Asignarle una tabla a la secuencia.
 ALTER TABLE tabla ALTER COLUMN atr SET DEFAULT nextval('tabla_atr_seq');					# Setear que el atr de la tabla de rige por la seq. Setear a not null si no lo es.
+
 
 
 - SQL RELACIONAL
@@ -49,6 +52,7 @@ RENAME = consulta AS nuevo_nombre					# También se puede renombrar una agregaci
 DIFERENCIA = consulta_1 EXCEPT consulta_2				# Operador NO monótono.
 
 
+
 - AGREGACION
 
 COUNT(DISTINT atributo)		# Cuenta el número de elementos diferentes.
@@ -60,6 +64,7 @@ GROUP BY atributo		# Agrupa por atributo, incluir todos los que se proyecten. Se
 HAVING condicion		# Después del GROUP BY y antes del ORDER BY. Es para condicionar agregaciones (no los alias). El COUNT se ejecuta después del WHERE.
 
 
+
 - RECURSION
 
 WITH RECURSIVE tabla_recursiva(atr_1, atr_2) AS
@@ -69,6 +74,7 @@ WITH RECURSIVE tabla_recursiva(atr_1, atr_2) AS
    SELECT T.atr_1, TR.atr_2 FROM tabla AS T, tabla_recursiva AS TR WHERE condición
 )
 SELECT * FROM tabla_recursiva;
+
 
 
 - FUNCIONES BASICAS - PROCEDIMIENTOS ALMACENADOS
@@ -83,43 +89,82 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-SELECT nombre_fn(input_1, ..., input_n)					# Ejecuta la función.
+SELECT nombre_fn(input_1, ..., input_n);				# Ejecuta la función.
+\i nombre_fn.sql							# Para importarla a la DB.
 
-
-- USAR VARIABLE EN LAS SENTENCIAS
-
+-- USAR VARIABLE EN LAS SENTENCIAS
 var := to_char(i, '999999999');						# Variable declarada anteriormente y se define como el resultado de la otra fn.
 
-
 - ITERACION
-
 FOR var IN a...b LOOP							# Tambien existen WHILE y LOOP. No es necesario declarar var.
     sentencias_sql
 END LOOP;
-
 FOR var_tipo_record IN consulta_sql LOOP				# Hay que declarar esta variable como RECORD.
     sentencias_sql
 END LOOP;
 
-
-- CONDICIONALES
-
+-- CONDICIONALES
 IF condición_booleana THEN
     sentencias_sql
 ELSE
     sentencias_sql
 END IF;
-
 CASE WHEN condición_booleana THEN sentencias_sql;
      ...
      WHEN condición_booleana_n THEN sentencias_sql_n;
      ELSE sentencias_sql_n+1;
 END CASE;
 
-
-- SQL DINAMICO
-
+-- SQL DINAMICO
 EXECUTE 'consulta con $1, ..., $n;' USING atr_1, ..., atr_n;		# El EXECUTE ejecuta el string de una consulta con variables dinámicas que pueden cambiar.
-   
+
+
+
+- MONGODB
+
+sudo systemctl start mongod							# Iniciar el proceso de mongodb.
+sudo systemctl status mongod							# Revisar que esté corriendo.
+sudo systemctl stop mongod							# Detener el proceso de mongodb.
+sudo systemctl restart mongod							# Reiniciar el proceso.
+mongo										# Iniciar la consola de mongodb mientras se corre el proceso.
+use db										# En la consola para usar una db.
+show collections								# Dentro de la db para ver las colecciones.
+mongoimport --db bbdd --collection col --drop --file col.json --jsonArray	# Importa un "col.json" en la bbdd llamada "bbdd" como colección "col".
+
+-- OPERACIONES
+db.collection.find({atr_1:input}, {atr_2:1, atr_3:0})			# Busca en la db en uso los datos de la collection con el atributo que sea igual que el input (o lo contenga si es una lista). Mostrando sólo los atr proyectados. (Sacar el _id).
+	atr: [input_1, ...]						# Todos los que ese atributo hagan match con alguno de la lista.
+	.pretty()							# Muestra todo más legible.
+	.sort({atr: 1})							# Ordena por los atributos pasados.
+db.collection.find({atr:{$regex:"input"}})				# Busca que el atr contenga el texto input.
+	$gt: input							# Mayor que. $gte mayor o igual.
+	$lt: input							# Mayor que. $lte menor o igual.
+	$ne: input							# No el input.
+	$and: [condición_1, ...]					# Revisa que se cumplan todas las condiciones.
+	$or: [condición_1, ...]						# Revisa que se cumplan las condiciones por un OR.
+	$all: [input_1, ...]						# Verifica que en una lista deben estar todos los valores dados.
+	$in: [input_1, ...]						# Verifica que en una lista debe esta al menos uno de los valores dados.
+	$nin: [input_1, ...]						# Verifica que en una lista no debe haber ninguno de los valores dados.
+db.usuarios.aggregate([{$group: {_id: null, total: {$sum: "$atr"}}}])	# Agrega, agrupa, y suma por el atributo. (También se puede usar $avg).
+	{$group: {_id: "$atr_1", total: {$sum: "$atr_2"}		# Agrupa por atr_1 y suma los atr_2.
+	{$group: {_id: "$atr_1", total: {$sum: {$sum: "$atr_2"}}	# Agrupa por atr_1 y suma los valores de atr_2 si es una lista.
+	{$match: {atr: input}}						# Dentro de la lista para hacer match.
+db.getCollectionInfos({name:"collection"})				# Ver info de cierta colección.
+db.collection.getIndexes()						# Printea los índices.
+db.collection.createIndex({atr:1})					# Crea un índice por dicho atr.
+db.collection.createIndex({atr:"text"})					# Crea un índice de texto del tipo TF-IDF.
+db.collection.dropIndex("index")					# Drop del índice indicado.
+db.collection.find({$text: {$search: "input"}})				# Utiliza el índice de texto para buscar eficietemente. Funciona como google.
+	"input_1 input_2 ..."						# Busca mediante OR los diferentes inputs. (Completa el input si al menos una palabra entera es encontrada).
+	" \"input textual\"  "						# Busca textual el input.
+	" \"input_1\" \"input_2\" "					# Busca input_1 Y input_2 ambos textuales. (Completa el input si al menos una palabra entera es encontrada).
+	"input_1 -\"input_2\" "}					# Hay que buscar al menos un input_1 para descartar input_2.
+
+
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-debian/
+
+
+
 
 
