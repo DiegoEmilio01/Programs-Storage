@@ -14,6 +14,7 @@ git checkout branch		# Cambiarse de branch.
 git branch			# Ver todas las branches. (gb)
 git branch -d branch		# Eliminar branch.
 git push origin branch		# ga, gc y despues este comando para pushear la branch. En github hay que hacer el pull request y el merge.
+git reset --hard origin/master	# Resetea cuando hay commits en la branch y estos cambios deben ser descartados.
 
 
 - REVERTIR un commit y que no está el historial (borrar todo el comtenido de ese comando):
