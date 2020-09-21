@@ -1,19 +1,22 @@
+https://try.github.io/
+https://code.visualstudio.com/Docs/editor/versioncontrol
+
 - SUBIR CAMBIOS AL REPO ORIGINAL:
 
-git status			# Verificar el estado. (gs)
-git add --all			# Agregar todo lo nuevo a "querer cambiarlo". (ga)
-git commit -m "mensaje"		# Generar el commit y confirmar los cambios con su respectivo mensaje. (gc "mensaje")
-git push			# Enviar los cambios al repositorio en GitHub. (gp)
+git status			# Verificar el estado. (gits)
+git add --all			# Agregar todo lo nuevo a "querer cambiarlo". (gita)
+git commit -m "mensaje"		# Generar el commit y confirmar los cambios con su respectivo mensaje. (gitc "mensaje")
+git push			# Enviar los cambios al repositorio en GitHub. (gitp)
 
 
 
 - GIT BRANCHES
 
-git checkout -b new_branch	# Crea nueva branch. (gh -b)
+git checkout -b new_branch	# Crea nueva branch. (gith -b)
 git checkout branch		# Cambiarse de branch.
-git branch			# Ver todas las branches. (gb)
+git branch			# Ver todas las branches. (gitb)
 git branch -d branch		# Eliminar branch.
-git push origin branch		# ga, gc y despues este comando para pushear la branch. En github hay que hacer el pull request y el merge.
+git push origin branch		# gita, gitc y después este comando para pushear la branch. En github hay que hacer el pull request y el merge.
 git reset --hard origin/master	# Resetea cuando hay commits en la branch y estos cambios deben ser descartados.
 
 
