@@ -1,0 +1,15 @@
+- NODE
+
+
+
+- NODE VERSION MANAGER
+
+https://github.com/nvm-sh/nvm Buscar ahí el comando de instalación.
+
+nvm list		# Lista las versiones instaladas.
+nvm install 12.18.3	# Instala la versión especificada.
+nvm current		# Muestra qué versión se está utilizando.
+nvm use 12.18.3		# Establece usar dicha versión.
+npm install -g yo	# Usa node package manager para instalar globalmente Yeoman.
+
+
