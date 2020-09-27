@@ -32,6 +32,10 @@ git push -f
 git revert <commit hash>
 
 
+- Borrar info sensible de todo el historial
+
+https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/removing-files-from-a-repositorys-history
+
 - ACTUALIZAR el repo a un estado anterior de un commit pasado:
 
 git checkout <commit hash>
