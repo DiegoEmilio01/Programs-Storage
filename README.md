@@ -1,2 +1,3 @@
 # Programs Storage
-Programs storage in different languages by Diego Bustamante.
+- Programs in different languages by Diego Bustamante.
+- Numerous tools commands.
