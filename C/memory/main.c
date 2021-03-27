@@ -32,6 +32,6 @@ int main(int argc, char** argv)
   int* A = goodArray();
   printf("%i\n", A[1]);
   free(A);
-  
+
   return 0;
 }
