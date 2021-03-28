@@ -6,5 +6,7 @@ int main(int argc, char** argv)
   printf("%s\n", s);
   char r[5] = "Hola";
   printf("%s\n", r);
+  char* t = "Hola";
+  printf("%s\n", t);
   return 0;
 }
